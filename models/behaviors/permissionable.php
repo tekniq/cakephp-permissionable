@@ -11,7 +11,7 @@ class PermissionableBehavior extends ModelBehavior {
 		if ($queryData['permissions']) {
 			$permissions = $model->getPermissions();
 			if (!empty($permissions) && is_array($permissions)) {
-				$queryData['conditions']['AND'] = array_merge((array)$queryData['conditions']['AND'], $permissions);
+				$queryData['conditions'] = array_merge_recursive($queryData['conditions'], array('AND' => $permissions));
 			}
 		}
 		return $queryData;
